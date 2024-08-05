@@ -1,11 +1,11 @@
 function saveAccount() {
-    var email = document.querySelector('#addAccount input[placeholder="Email"]').value;
-    var key = document.querySelector('#addAccount input[placeholder="Ключ"]').value;
+    var accountsText = document.querySelector('#addAccount textarea[placeholder="Аккаунты с новой строки в формате email:password"]').value.trim();
+    var accounts = accountsText.split('\n').map(function (line) {
+        var [email, key] = line.split(':');
+        return { email: email.trim(), key: key.trim() };
+    });
 
-    var data = {
-        email: email,
-        key: key
-    };
+    var data = { accounts: accounts };
 
     fetch('api/services/create_account.php', {
         method: 'POST',
@@ -17,10 +17,11 @@ function saveAccount() {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'ok') {
-            addAccountToTable(email, '💤');
-            alert('Аккаунт добавлен');
-            document.querySelector('#addAccount input[placeholder="Email"]').value = '';
-            document.querySelector('#addAccount input[placeholder="Ключ"]').value = '';
+            data.accounts.forEach(account => {
+                addAccountToTable(account.email, '💤');
+            });
+            alert('Аккаунты добавлены');
+            document.querySelector('#addAccount textarea[placeholder="Аккаунты с новой строки в формате email:password"]').value = '';
             document.querySelector('#addAccount .btn-secondary[data-bs-dismiss="modal"]').click();
         } else {
             alert('Ошибка: ' + data.message);
@@ -28,7 +29,7 @@ function saveAccount() {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Ошибка при добавлении аккаунта');
+        alert('Ошибка при добавлении аккаунтов');
     });
 }
 
@@ -44,3 +45,5 @@ function addAccountToTable(email, statusIcon) {
     cell2.innerText = email;
     cell3.innerText = statusIcon;
 }
+
+document.getElementById('saveAccount').addEventListener('click', saveAccount);

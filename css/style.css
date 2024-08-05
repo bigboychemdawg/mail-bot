@@ -165,6 +165,7 @@ input {
 textarea {
 	border: 1px solid grey;
 	color: var(--text-color);
+	max-height: 300px;
 }
 .accordion {
 	--bs-accordion-btn-focus-border-color: none !important;

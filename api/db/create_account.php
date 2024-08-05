@@ -7,7 +7,8 @@ R::setup('sqlite:' . $databasePath);
 
 if (!R::testConnection()) die('No DB connection!');
 
-// Создание таблицы accounts, если она не существует
+ini_set('log_errors', 1);
+ini_set('error_log', '/dev/stderr');
 
 function createAccount($email, $key) {
     $account = R::dispense('accounts');

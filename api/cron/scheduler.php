@@ -11,21 +11,21 @@ function processQueue() {
     if ($task) {
         $mail = R::load('mails', $task->mail_id);
 
-        // Получить доступный аккаунт
-        $account = R::findOne('accounts', 'status IS NULL OR status != 0');
-        if ($account) {
-            sendMail($account, $mail->recipient, $mail->subject, $mail->body,  $mail->id);
+        // Получить связанный аккаунт
+        $account = R::load('accounts', $task->account);
+        if ($account && ($account->status === null || $account->status != 0)) {
+            sendMail($account, $mail->recipient, $mail->subject, $mail->body, $mail->id);
 
             // Обновить статус задачи
             $task->status = 'sent';
             R::store($task);
-            error_log('Scheduler: '.$task);
+            error_log('Scheduler: Mail id ' . $task->mail_id . ' sent using account ' . $task->account);
         } else {
             error_log('Scheduler: No available accounts');
         }
     } else {
         error_log('Scheduler: No pending tasks');
-    }   
+    }
 }
 
 processQueue();

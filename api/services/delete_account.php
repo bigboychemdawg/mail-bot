@@ -6,6 +6,9 @@ require_once('../db/delete_account.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $ids = $data['ids'];
 
+ini_set('log_errors', 1);
+ini_set('error_log', '/dev/stderr');
+
 if (!empty($ids)) {
     $status = deleteAccounts($ids);
     if ($status) {

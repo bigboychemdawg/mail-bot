@@ -32,10 +32,9 @@ if (user && user.id) {
             body.innerHTML = originalContent;
             const divs = document.querySelectorAll('.btn-group-vertical.menu > div');
             const tasks = document.querySelectorAll('.task > div');
-            const checkboxes = document.querySelectorAll('.accounts input[type="checkbox"]');
             const textInputs = document.querySelectorAll('.create-mail input[type="text"], .create-mail textarea');
 
-             // Устанавливаем обработчики событий для верхнего уровня
+            // Устанавливаем обработчики событий для верхнего уровня
             divs.forEach((div) => {
                 const radio = div.querySelector('input[type="radio"]');
                 if (radio) {
@@ -58,23 +57,25 @@ if (user && user.id) {
             });
 
             // Добавляем слушатели для чекбоксов
+            const checkboxes = document.querySelectorAll('.accounts input[type="checkbox"]');
             checkboxes.forEach((checkbox) => {
                 checkbox.addEventListener('change', () => {
-                    toggleMainButton();
+                    toggleMainButton(checkboxes, textInputs);
                 });
             });
 
             // Добавляем слушатели для текстовых полей
             textInputs.forEach((input) => {
                 input.addEventListener('input', () => {
-                    toggleMainButton();
+                    toggleMainButton(checkboxes, textInputs);
                 });
             });
 
-            // Слушатель для сохранения аккаунта
-            document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('saveAccount').addEventListener('click', saveAccount);
-            });
+            // Слушатель для сохранения аккаунта          
+            document.getElementById('saveAccount').addEventListener('click', saveAccount);
+
+            // Начальная проверка состояния mainButton
+            toggleMainButton(checkboxes, textInputs);
         }
     });
 
@@ -110,11 +111,11 @@ if (user && user.id) {
         }
     }
 
-    function toggleMainButton() {
+    function toggleMainButton(checkboxes, textInputs) {
         const isCheckboxChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
         const areTextInputsFilled = Array.from(textInputs).every(input => input.value.trim() !== '');
 
-        if (isCheckboxChecked || areTextInputsFilled) {
+        if (isCheckboxChecked || areTextInputsFilled || checkboxes.length === 0) {
             mainButton.show();
         } else {
             mainButton.hide();
