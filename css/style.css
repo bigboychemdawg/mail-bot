@@ -1,0 +1,213 @@
+:root {
+	--bg-color: var(--tg-theme-bg-color);
+	--secondary-bg-color: var(--tg-theme-secondary-bg-color);
+	--text-color: var(--tg-theme-text-color);
+	--hint-color: var(--tg-theme-hint-color);
+	--link-color: var(--tg-theme-link-color);
+	--button-color: var(--tg-theme-button-color);
+	--button-text-color: var(--tg-theme-button-text-color);
+}
+body{
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+}
+.header{
+	font-family: 'Bebas Neue', sans-serif;
+	font-size: 40px;
+	padding: 20px;
+}
+.header span{
+	color: #62c862;
+}
+.header b{
+	font-size: 20px;
+}
+.menu{
+	width: 100%;
+	padding: 20px;	
+}
+.menu label{
+	width: 100%;
+	background-color: transparent;
+	font-size: 14px;
+	padding: 15px 0px;
+	border: none;
+	border-radius: 20px;
+	color: var(--text-color);
+}
+.create-mail, .accounts, .tasks{
+	width: 100%;
+	border-radius: 20px;
+}
+.collapse, .card, .card-body{
+	background-color: transparent;
+	color: var(--text-color);
+	width: 100%;
+	border-radius: 10px;
+	border: none;
+}
+.card{
+	background-color: var(--secondary-bg-color);
+	width: 100%;
+	min-height: 10vh;
+	height: 100%;
+	border-radius: 10px;
+	margin-top: 15px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+}
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active, .btn:hover {
+    color: var(--text-color);
+    background-color: var(--secondary-bg-color);
+    border-color: var(--secondary-bg-color);
+}
+.arrow{
+	margin-right: 15px;
+	width: 25px;
+}
+p {
+	margin: 0;
+}
+.create-mail p {
+	width: 100%;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+}
+.quantity{
+	width: 4rem;
+}
+.flow-percentage{
+	width: 50px;
+}
+.minus, .plus{
+	background-color: var(--secondary-bg-color);
+	border: none;
+	padding: 0;
+}
+.minus svg path,
+.plus svg path {
+  fill: var(--text-color);
+}
+.form-check{
+	height: 30px;
+}
+.form-check label{
+	padding: 0;
+	width: auto;
+}
+textarea{
+	width: 100%;
+	background-color: var(--secondary-bg-color);
+	color: var(--text-color);
+	min-height: 30vh;
+}
+.form-check-input:checked{
+	background-color: var(--tg-theme-link-color);
+	border: var(--tg-theme-link-color);
+}
+.search{
+	padding: 10px 15px;
+	position: absolute;
+	background-color: var(--bg-color);
+	max-width: 250px;
+	max-height: 350px;
+	overflow-y: auto;
+}
+.search span{
+	width: 100%;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #4b4747;
+	padding: 5px;
+}
+
+/* CAMPAIGNS */
+.campaignCreationStatus{
+	margin-top: 20px;
+}
+.campaignCreationStatus p{
+	width: 100%;
+}
+.campaignData label{
+	padding: 10px 0px;
+	width: 70px;
+}
+.campaignDetails{
+	margin-top: 0;
+}
+.campaignDetails p{
+	font-family: 'Courier Prime', monospace;
+	font-size: 12px;
+}
+.campaignCollapse {
+
+}
+.rotated {
+  transform: rotate(90deg);
+  transition: transform 0.1s;
+}
+.campaignCreationStatus {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* SPAM BOT */
+input, textarea {
+	background-color: transparent;
+}
+input {
+	border: none;
+	border-bottom: 1px solid grey;
+	color: var(--text-color);
+}
+textarea {
+	border: 1px solid grey;
+	color: var(--text-color);
+}
+.accordion {
+	--bs-accordion-btn-focus-border-color: none !important;
+	--bs-accordion-btn-focus-box-shadow: none !important;
+}
+.accordion-item {
+	background-color: transparent !important;
+	color: var(--text-color);
+	border: 1px solid grey;
+}
+.accordion-item button {
+	background-color: transparent !important;
+	color: var(--text-color);
+}
+.accordion-button:not(.collapsed) {
+	background-color: transparent !important;
+	color: var(--text-color);
+}
+.accordion-button:focus {
+	outline: none;
+}
+.accordion, .accordion-flush {
+	background-color: transparent !important;
+}
+.accordion-item:first-of-type {
+	border-top-left-radius: 20px !important;
+	border-top-right-radius: 20px !important;
+}
+.accordion-item:last-of-type {
+	border-bottom-right-radius: 20px !important;
+	border-bottom-left-radius: 20px !important;
+}
+.accordion-button:after {
+	background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23808080'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+  }
+.table > :not(caption) > * > * {
+	background-color: transparent !important;
+	color: var(--text-color) !important;
+}
+.modal-content {
+	color: var(--text-color);
+	background-color: var(--bg-color);;
+}
+.modal-footer {
+	border-top: none;
+}

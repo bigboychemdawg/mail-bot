@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>$PAM BOT</title>
+    <script defer src="js/loader.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="js-errors" style="color: red;"></div>
+    <div id="console-errors" style="color: blue;"></div>
+
+    <div class="wrapper">
+        <div class="header">
+            <p><span>$</span>pam Bot <b>v 0.1</b></p>
+        </div>
+        <div class="btn-group-vertical menu" role="group">
+            <div class="create-mail">
+                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" data-bs-toggle="collapse" data-bs-target="#createMail" aria-expanded="false" aria-controls="createMail">
+                <div id="createMailLabel" class="d-flex justify-content-between w-100" style="background-color: var(--secondary-bg-color);">
+                    <label class="btn btn-outline-light" for="vbtn-radio1" style="font-size: 18px;">Новое письмо</label>
+                    <img class="arrow" src="img/arrow.svg">
+                </div>
+                <div class="collapse" id="createMail">
+                  <div class="card card-body">
+                        <div class="d-flex col-sm-12 justify-content-between align-items-center">
+                            <div class="container d-flex justify-content-start p-0">
+                                <input type="text" class="w-100" placeholder="Получатель">
+                            </div>
+                        </div>
+                        <div class="d-flex col-sm-12 justify-content-between align-items-center mt-3">
+                            <div class="container d-flex justify-content-start p-0">
+                                <input type="text" class="w-100" placeholder="Тема">
+                            </div>
+                        </div>
+                        <div class="d-flex col-sm-12 justify-content-between align-items-center mt-3">
+                            <div class="container d-flex justify-content-start p-0">
+                                <input type="text" class="w-100" placeholder="Жертва (домен)">
+                            </div>
+                        </div>
+                        <div class="d-flex col-sm-12 justify-content-between align-items-center mt-3">
+                            <textarea class="w-100" placeholder="Текст письма"></textarea>
+                        </div>
+                  </div>
+                </div>
+            </div>
+            <br>        
+            <div class="accounts">                
+                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off" data-bs-toggle="collapse" data-bs-target="#accounts" aria-expanded="false" aria-controls="accounts">
+                <div id="accountsLabel" class="d-flex justify-content-between w-100" style="background-color: var(--secondary-bg-color);">
+                    <label class="btn btn-outline-light" for="vbtn-radio2" style="font-size: 18px;">Аккаунты</label>
+                    <img class="arrow" src="img/arrow.svg">
+                </div>
+                <div class="collapse" id="accounts">
+                  <div class="card card-body">
+                    <div class="container" style="text-align: center">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addAccount">
+                        Добавить
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="addAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addAccountLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <input type="text" class="mt-3 w-100" placeholder="Email">
+                                        <input type="text" class="mt-3 w-100" placeholder="Ключ">
+                                    </div>
+                                    <div class="modal-footer justify-content-evenly">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                        <button type="button" id="saveAccount" class="btn btn-primary">Сохранить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-transparent mt-3" id="table">
+    <tbody>
+        {% for account in accounts %}
+        <tr>
+            <th scope="row"><input class="form-check-input" type="checkbox" value="{{ account.id }}" id="flexCheckDefault{{ account.id }}" /></th>
+            <td>{{ account.email }}</td>
+            <td>
+                {% if account.status == 1 %}
+                    ✅
+                {% elseif account.status == 0 %}
+                    ❌
+                {% else %}
+                    💤
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <br>        
+            <div class="tasks">                
+                <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off" data-bs-toggle="collapse" data-bs-target="#tasksCollapse" aria-expanded="false" aria-controls="tasksCollapse">
+                <div id="tasksLabel" class="d-flex justify-content-between w-100" style="background-color: var(--secondary-bg-color);">
+                    <label class="btn btn-outline-light" for="vbtn-radio3" style="font-size: 18px;">Задачи</label>
+                    <img class="arrow" src="img/arrow.svg">
+                </div>
+                <div class="collapse" id="tasksCollapse">
+                  <div class="card card-body">
+                    <div class="accordion" id="accordionFlushExample">
+                        {% for mail in mails %}
+                        <div class="accordion-item mb-3">
+                          <h2 class="accordion-header" id="flush-heading{{ mail.id }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ mail.id }}" aria-expanded="false" aria-controls="flush-collapse{{ mail.id }}">
+                              {{ mail.site }}
+                            </button>
+                          </h2>
+                          <div id="flush-collapse{{ mail.id }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ mail.id }}" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p class="mb-2">Прогресс: {{ mail.tasks_sent }}/{{ mail.tasks_total }}</p>
+                                <p class="mb-2">Создал: {{ mail.author }}</p>
+                                <p class="mb-2">Получатель: {{ mail.recipient }}</p>
+                                <p class="mb-2">Тема: {{ mail.subject }}</p>
+                                <p class="mb-2">{{ mail.body }}</p>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <br>        
+        </div>
+    </div>
+<script src="js/telegram.js"></script>
+<script src="js/createMail.js"></script>
+<script src="js/saveAccount.js"></script>
+<script src="js/deleteAccount.js"></script>
+</body>
+</html>

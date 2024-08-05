@@ -1,0 +1,10 @@
+<?php 
+
+//Telegram
+$botToken = "";
+// Allowed Telegram IDs
+$users = [
+    1234567890 => '@123',
+    1234567890 => '@456'
+    // 1234567890 => '@789'
+];
