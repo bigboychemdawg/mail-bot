@@ -1,5 +1,5 @@
 function createMail() {
-    const recipient = document.querySelector('#createMail input[placeholder="Получатель"]').value.trim();
+    const recipient = document.querySelector('#createMail input[placeholder="Получатель (или несколько через ;)"]').value.trim();
     const subject = document.querySelector('#createMail input[placeholder="Тема"]').value.trim();
     const site = document.querySelector('#createMail input[placeholder="Жертва (домен)"]').value.trim();
     let body = document.querySelector('#createMail textarea[placeholder="Текст письма"]').value.trim();
