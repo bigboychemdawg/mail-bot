@@ -33,15 +33,20 @@ function saveAccount() {
     });
 }
 
-function addAccountToTable(email, statusIcon) {
+function addAccountToTable(id, email, statusIcon) {
     var table = document.getElementById('table').getElementsByTagName('tbody')[0];
     var newRow = table.insertRow();
 
-    var cell1 = newRow.insertCell(0);
-    var cell2 = newRow.insertCell(1);
-    var cell3 = newRow.insertCell(2);
+    var cell0 = newRow.insertCell(0);
+    var cell1 = newRow.insertCell(1);
+    var cell2 = newRow.insertCell(2);
+    var cell3 = newRow.insertCell(3);
 
-    cell1.innerHTML = '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />';
+    // Получение текущего количества строк
+    var rowCount = table.rows.length;
+
+    cell0.innerText = rowCount + 1; // Нумерация строк
+    cell1.innerHTML = `<input class="form-check-input" type="checkbox" value="${id}" id="flexCheckDefault${id}" />`;
     cell2.innerText = email;
     cell3.innerText = statusIcon;
 }
