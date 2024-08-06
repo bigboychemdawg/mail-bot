@@ -2,8 +2,11 @@ function createMail() {
     const recipient = document.querySelector('#createMail input[placeholder="Получатель"]').value.trim();
     const subject = document.querySelector('#createMail input[placeholder="Тема"]').value.trim();
     const site = document.querySelector('#createMail input[placeholder="Жертва (домен)"]').value.trim();
-    const body = document.querySelector('#createMail textarea[placeholder="Текст письма"]').value.trim();
+    let body = document.querySelector('#createMail textarea[placeholder="Текст письма"]').value.trim();
     const telegramId = window.Telegram.WebApp.initDataUnsafe.user.id;
+
+    // Преобразуем текст в HTML
+    body = textToHTML(body);
 
     const data = {
         telegramId: telegramId,
@@ -32,4 +35,10 @@ function createMail() {
         console.error('Ошибка:', error);
         alert('Ошибка при отправке запроса.');
     });
+}
+
+function textToHTML(text) {
+    let lines = text.split('\n');
+    lines = lines.map(line => `<p>${line.trim()}</p>`);
+    return lines.join('');
 }
