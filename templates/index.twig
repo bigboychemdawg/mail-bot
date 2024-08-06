@@ -81,25 +81,25 @@
                             </div>
                         </div>
                         <table class="table table-transparent mt-3" id="table">
-    <tbody>
-        {% for account in accounts %}
-        <tr>
-            <th scope="row"><input class="form-check-input" type="checkbox" value="{{ account.id }}" id="flexCheckDefault{{ account.id }}" /></th>
-            <td>{{ account.email }}</td>
-            <td>
-                {% if account.status == 1 %}
-                    ✅
-                {% elseif account.status == 0 %}
-                    ❌
-                {% else %}
-                    💤
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+                            <tbody>
+                                {% for account in accounts %}
+                                <tr>
+                                    <th scope="row">{{ loop.index }}</th>
+                                    <th scope="row"><input class="form-check-input" type="checkbox" value="{{ account.id }}" id="flexCheckDefault{{ account.id }}" /></th>
+                                    <td>{{ account.email }}</td>
+                                    <td>
+                                        {% if account.status == 1 %}
+                                            ✅
+                                        {% elseif account.status == 0 %}
+                                            ❌
+                                        {% else %}
+                                            💤
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                   </div>
                 </div>

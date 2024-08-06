@@ -113,9 +113,9 @@ if (user && user.id) {
 
     function toggleMainButton(checkboxes, textInputs) {
         const isCheckboxChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-        const areTextInputsFilled = Array.from(textInputs).every(input => input.value.trim() !== '');
+        const areAllTextInputsFilled = Array.from(textInputs).every(input => input.value.trim() !== '');
 
-        if (isCheckboxChecked || areTextInputsFilled || checkboxes.length === 0) {
+        if (isCheckboxChecked || areAllTextInputsFilled) {
             mainButton.show();
         } else {
             mainButton.hide();
