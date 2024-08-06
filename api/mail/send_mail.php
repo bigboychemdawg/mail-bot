@@ -24,8 +24,12 @@ function sendMail($account, $recipient, $subject, $body, $id) {
 
         // Получатели
         $mail->setFrom($account->email);
-        $mail->addAddress($recipient);
         $mail->addReplyTo($account->email);
+
+        $recipients = explode(';', $recipient);
+        foreach ($recipients as $recipientEmail) {
+            $mail->addAddress(trim($recipientEmail));
+        }
 
         // Содержание
         $mail->isHTML(true);
@@ -34,7 +38,7 @@ function sendMail($account, $recipient, $subject, $body, $id) {
         $mail->addCustomHeader('X-Mailer', 'AntiPhishingLab');
         $mail->Subject = $subject;
         $mail->Body    = $body;
-        $mail->AltBody = $body;
+        $mail->AltBody = strip_tags($body);
 
         $mail->send();
         error_log('Mail id '.$id.' sent');
